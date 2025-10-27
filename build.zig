@@ -6,7 +6,6 @@ pub fn build(b: *std.Build) void {
 
     const glew = b.addLibrary(.{
         .name = "glew",
-        .linkage = if (target.result.os.tag == .windows) .dynamic else .static, // windows sucks
         .root_module = b.createModule(.{
             .target = target,
             .optimize = optimize,
@@ -33,26 +32,17 @@ pub fn build(b: *std.Build) void {
         .files = &.{
             "src/glew.c",
         },
-        .flags = &.{
-            "-std=c99",
-        },
     });
 
     glewinfo.addCSourceFiles(.{
         .files = &.{
             "src/glewinfo.c",
         },
-        .flags = &.{
-            "-std=c99",
-        },
     });
 
     visualinfo.addCSourceFiles(.{
         .files = &.{
             "src/visualinfo.c",
-        },
-        .flags = &.{
-            "-std=c99",
         },
     });
 
@@ -95,8 +85,11 @@ pub fn build(b: *std.Build) void {
     visualinfo.addIncludePath(b.path("include"));
 
     // Enable static library mode
-    if (glew.linkage == .static)
+    if (glew.linkage == .static) {
         glew.root_module.addCMacro("GLEW_STATIC", "1");
+        glewinfo.root_module.addCMacro("GLEW_STATIC", "1");
+        visualinfo.root_module.addCMacro("GLEW_STATIC", "1");
+    }
 
     glew.installHeadersDirectory(b.path("include/GL"), "GL", .{});
 
