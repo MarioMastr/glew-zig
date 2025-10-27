@@ -34,7 +34,7 @@ pub fn build(b: *std.Build) void {
             "src/glew.c",
         },
         .flags = &.{
-            "-std=c11",
+            "-std=c99",
         },
     });
 
@@ -43,7 +43,7 @@ pub fn build(b: *std.Build) void {
             "src/glewinfo.c",
         },
         .flags = &.{
-            "-std=c11",
+            "-std=c99",
         },
     });
 
@@ -52,7 +52,7 @@ pub fn build(b: *std.Build) void {
             "src/visualinfo.c",
         },
         .flags = &.{
-            "-std=c11",
+            "-std=c99",
         },
     });
 
