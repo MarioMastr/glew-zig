@@ -33,17 +33,26 @@ pub fn build(b: *std.Build) void {
         .files = &.{
             "src/glew.c",
         },
+        .flags = &.{
+            "-std=c11",
+        },
     });
 
     glewinfo.addCSourceFiles(.{
         .files = &.{
             "src/glewinfo.c",
         },
+        .flags = &.{
+            "-std=c11",
+        },
     });
 
     visualinfo.addCSourceFiles(.{
         .files = &.{
             "src/visualinfo.c",
+        },
+        .flags = &.{
+            "-std=c11",
         },
     });
 
