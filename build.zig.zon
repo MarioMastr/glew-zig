@@ -1,0 +1,14 @@
+.{
+  .name = .glew,
+  .version = "2.2.0",
+  .fingerprint = 0x1093599f0c2cd6f5,
+  .dependencies = .{},
+  .paths = .{
+    "include",
+    "src",
+    "LICENSE.txt",
+    "README.md",
+    "build.zig",
+    "build.zig.zon"
+  }
+}
