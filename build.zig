@@ -70,6 +70,13 @@ pub fn build(b: *std.Build) void {
         else => {},
     }
 
+    // Enable static library mode
+    if (glew.linkage == .static) {
+        glew.root_module.addCMacro("GLEW_STATIC", "1");
+        glewinfo.root_module.addCMacro("GLEW_STATIC", "1");
+        visualinfo.root_module.addCMacro("GLEW_STATIC", "1");
+    }
+
     // Link glew
     glewinfo.root_module.linkLibrary(glew);
     visualinfo.root_module.linkLibrary(glew);
@@ -83,13 +90,6 @@ pub fn build(b: *std.Build) void {
     glew.addIncludePath(b.path("include"));
     glewinfo.addIncludePath(b.path("include"));
     visualinfo.addIncludePath(b.path("include"));
-
-    // Enable static library mode
-    if (glew.linkage == .static) {
-        glew.root_module.addCMacro("GLEW_STATIC", "1");
-        glewinfo.root_module.addCMacro("GLEW_STATIC", "1");
-        visualinfo.root_module.addCMacro("GLEW_STATIC", "1");
-    }
 
     glew.installHeadersDirectory(b.path("include/GL"), "GL", .{});
 
